@@ -28,9 +28,7 @@ export const fetchPlugin = (inputCode: string) => {
       });
       build.onLoad({ filter: /.css$/ }, async (args: any) => {
         const { data, request } = await axios.get(args.path);
-
         //store response in cache
-
         const contents = data
           .replace(/\\n/g, '')
           .replace(/"/g, '\\"')
