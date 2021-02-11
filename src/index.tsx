@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { fetchPlugin } from './fetch-plugin';
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
+import { CodeEditor } from './components/code-editor';
 const App = () => {
   const ref = useRef<any>();
   const iframe = useRef<any>();
@@ -62,6 +63,10 @@ const App = () => {
 
   return (
     <div>
+      <CodeEditor
+        onChange={(value) => setInput(value)}
+        initialValue="const a = 1;"
+      />
       <textarea
         value={input}
         onChange={(e) => setInput(e.target.value)}
