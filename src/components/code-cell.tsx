@@ -6,12 +6,15 @@ import { Preview } from './preview';
 import { Resizable } from './resizable';
 const CodeCell = () => {
   const [input, setInput] = useState('');
+  const [error, setError] = useState('');
   const [code, setCode] = useState('');
 
   useEffect(() => {
     const timer = setTimeout(async () => {
-      const output = await esService(input);
-      setCode(output);
+      const { code, err } = await esService(input);
+
+      setCode(code);
+      setError(err);
     }, 500);
     return () => {
       clearTimeout(timer);
@@ -27,7 +30,7 @@ const CodeCell = () => {
             initialValue="const a = 1;"
           />
         </Resizable>
-        <Preview code={code} />
+        <Preview code={code} err={error} />
       </div>
     </Resizable>
   );
